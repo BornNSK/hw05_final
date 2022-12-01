@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+{% comment %} Колонки с отступом сверху и снизу {% endcomment %}
+<div class="row">
+  <h2>Вот что<span style="color:red"> Ya </span> умею:</h2>
+  {% comment %}
+    Боковой блок со списком технологий 
+    Займет всю ширину блока на мобильном
+    и 25% при размерах экрана ≥768px
+  {% endcomment %}
+  <aside class="col-12 col-md-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        Python
+      </li>
+      <li class="list-group-item">
+        Django
+      </li>
+      <li class="list-group-item">
+        HTML
+      </li>
+      <li class="list-group-item">
+        CSS
+      </li>
+    </ul>
+  </aside>
+  {% comment %}
+    Статья  
+    Займет всю ширину блока на мобильном
+    и 75% при размерах экрана ≥768px
+  {% endcomment %}
+  <article class="col-12 col-md-9">
+    <p>Этот, казалось бы, обычный, но объёмный набор технологий помог мне выполнить простой и современный сайт с постами!</p>
+  </article>
+</div>
+{% endblock %} 
