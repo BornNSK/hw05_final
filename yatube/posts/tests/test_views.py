@@ -205,7 +205,7 @@ class PostModelTest(TestCase):
                                     )
         self.assertTrue(Follow.objects.filter(user=self.user,
                                               author=self.post.author,
-                                                  ).exists())
+                                              ).exists())
 
     def test_autorized_user_unfollowed(self):
         """Проверка отписки от пользователя."""
