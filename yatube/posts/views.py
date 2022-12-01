@@ -8,10 +8,10 @@ from django.views.decorators.cache import cache_page
 
 
 NUMBER_OF_POSTS = 10
-KACHE_TIMER = 20
+CACHE_TIMER = 20
 
 
-@cache_page(KACHE_TIMER, key_prefix='index_page')
+@cache_page(CACHE_TIMER, key_prefix='index_page')
 def index(request):
     """Главная страница"""
     template = "posts/index.html"

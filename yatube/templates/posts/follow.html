@@ -7,8 +7,6 @@
 {% include 'posts/includes/switcher.html' %}
   {% for post in page_obj %}
   {% include 'posts/includes/post_list.html' %}
-    {% if not forloop.last %}
-    {% endif %}
   {% endfor %}
   {% include 'posts/includes/paginator.html' %}
 {% endblock %} 

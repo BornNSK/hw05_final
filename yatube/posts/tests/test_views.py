@@ -198,14 +198,17 @@ class PostModelTest(TestCase):
         response = self.authorized_client.get(f'/posts/{self.post.id}/')
         self.assertContains(response, 'круто')
 
-    def test_autorized_user_followed_and_unfollowed(self):
-        """Проверка подписки на пользователя и отписки от пользователя"""
+    def test_autorized_user_followed(self):
+        """Проверка подписки на пользователя."""
         self.authorized_client.post(reverse('posts:profile_follow',
                                             kwargs={'username': 'auth'})
                                     )
         self.assertTrue(Follow.objects.filter(user=self.user,
                                               author=self.post.author,
-                                              ).exists())
+                                                  ).exists())
+
+    def test_autorized_user_unfollowed(self):
+        """Проверка отписки от пользователя."""
         self.authorized_client.post(reverse('posts:profile_unfollow',
                                             kwargs={'username': 'auth'}
                                             )
@@ -215,7 +218,7 @@ class PostModelTest(TestCase):
                                                ).exists())
 
     def test_autorized_user_see_followed_posts(self):
-        """Проверка подписки на пользователя и отписки от пользователя"""
+        """Проверка отображения постов при подписки и после отписки"""
         non_followed_post = Follow.objects.count()
         self.authorized_client.post(reverse('posts:profile_follow',
                                             kwargs={'username': 'auth'},

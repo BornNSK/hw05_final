@@ -8,7 +8,7 @@ from posts.models import Post
 from django.test import Client, TestCase, override_settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
-from ..models import Group, Post
+from ..models import Group, Post, Comment
 from http import HTTPStatus
 
 User = get_user_model()
@@ -174,8 +174,8 @@ class PostModelTest(TestCase):
 
     def test_authorized_user_add_comment(self):
         """Авторизованный пользователь создаёт комментарий."""
-        aut_comment_count = Post.objects.count()
-        form_data = {'comment': 'Комментарии'}
+        aut_comment_count = Comment.objects.count()
+        form_data = {'comments': 'Комментарии'}
         response = self.authorized_client.post(reverse('posts:add_comment',
                                                        kwargs={'post_id':
                                                                self.post.id
@@ -188,7 +188,10 @@ class PostModelTest(TestCase):
                                                kwargs={'post_id':
                                                        self.post.id
                                                        }))
-        self.assertEqual(Post.objects.count(), aut_comment_count)
+        self.assertEqual(Comment.objects.count(), aut_comment_count)
+        self.assertTrue(Comment.objects.filter(text=form_data['comments'],
+                                               author=self.user,
+                                               post=self.post,).exists)
 
     def test_cache_index(self):
         """Проверка хранения и очищения кэша для index."""
