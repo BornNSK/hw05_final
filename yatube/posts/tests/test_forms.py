@@ -188,7 +188,7 @@ class PostModelTest(TestCase):
                                                kwargs={'post_id':
                                                        self.post.id
                                                        }))
-        self.assertEqual(Comment.objects.count(), aut_comment_count+1)
+        self.assertEqual(Comment.objects.count(), aut_comment_count + 1)
         self.assertTrue(Comment.objects.filter(text=form_data['text'],
                                                author=self.user,
                                                post=self.post,).exists())
