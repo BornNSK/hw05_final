@@ -175,7 +175,7 @@ class PostModelTest(TestCase):
     def test_authorized_user_add_comment(self):
         """Авторизованный пользователь создаёт комментарий."""
         aut_comment_count = Comment.objects.count()
-        form_data = {'comments': 'Комментарии'}
+        form_data = {'text': 'Комментарии'}
         response = self.authorized_client.post(reverse('posts:add_comment',
                                                        kwargs={'post_id':
                                                                self.post.id
@@ -188,10 +188,10 @@ class PostModelTest(TestCase):
                                                kwargs={'post_id':
                                                        self.post.id
                                                        }))
-        self.assertEqual(Comment.objects.count(), aut_comment_count)
-        self.assertTrue(Comment.objects.filter(text=form_data['comments'],
+        self.assertEqual(Comment.objects.count(), aut_comment_count+1)
+        self.assertTrue(Comment.objects.filter(text=form_data['text'],
                                                author=self.user,
-                                               post=self.post,).exists)
+                                               post=self.post,).exists())
 
     def test_cache_index(self):
         """Проверка хранения и очищения кэша для index."""
