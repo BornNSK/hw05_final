@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'sorl.thumbnail',
     'debug_toolbar',
+    'django_static_jquery',
 ]
 
 MIDDLEWARE = [
